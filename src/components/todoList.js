@@ -11,7 +11,7 @@ function TodoList({ todos, handleDeleteTodo, handleCompleteTodo }) {
 
     return (
         <ul>
-            <p>Pending tasks {pendingCount}</p>
+            <p>Pending tasks ({pendingCount})</p>
             {todos.map((todo) => (
 
                 <li key={todo.id} className="lists">
