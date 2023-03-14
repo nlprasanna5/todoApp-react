@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './todoStyle.css';
 function TodoList({ todos, handleDeleteTodo, handleCompleteTodo }) {
+
+    const [pendingCount, setPendingCount] = useState(0);
+    useEffect(() => {
+        setPendingCount(todos.filter((todo) => {
+            return !todo.completed
+        }).length);
+    }, [todos]);
+
     return (
         <ul>
-            <p>Pending tasks ({todos.filter((todo) => !todo.completed).length})</p>
+            <p>Pending tasks {pendingCount}</p>
             {todos.map((todo) => (
-                // <div className="list-container">
 
-                    <li key={todo.id} className="lists">
-                        <div>
-                            <span
-                                className="text"
-                                style={{ textDecoration: todo.completed ? "line-through" : "" }}
-                            >
-                                {todo.title}
-                            </span>
-                        </div>
+                <li key={todo.id} className="lists">
+                    <div>
+                        <span
+                            className="text"
+                            style={{ textDecoration: todo.completed ? "line-through" : "" }}
+                        >
+                            {todo.title}
+                        </span>
+                    </div>
 
-                        <div className="buttons">
-                            <button onClick={() => handleCompleteTodo(todo.id)} className="complete">
-                                Complete
-                            </button>
-                            <button onClick={() => handleDeleteTodo(todo.id)} className="delete">
-                                Delete
-                            </button>
-                        </div>
-                    </li>
-                // </div>
+                    <div className="buttons">
+                        <button onClick={() => handleCompleteTodo(todo.id)} className="complete">
+                            Complete
+                        </button>
+                        <button onClick={() => handleDeleteTodo(todo.id)} className="delete">
+                            Delete
+                        </button>
+                    </div>
+                </li>
+
             ))
             }
         </ul >
