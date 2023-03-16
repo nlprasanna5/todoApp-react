@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './todoStyle.css';
+
 function TodoList({ todos, handleDeleteTodo, handleCompleteTodo }) {
 
     const [pendingCount, setPendingCount] = useState(0);
+
     useEffect(() => {
         setPendingCount(todos.filter((todo) => {
             return !todo.completed
@@ -11,7 +13,8 @@ function TodoList({ todos, handleDeleteTodo, handleCompleteTodo }) {
 
     return (
         <ul>
-            <p>Pending tasks ({pendingCount})</p>
+            <p style={{fontSize:"30px", textAlign:"center",marginRight:"50px"}}>Pending tasks ({pendingCount})</p>
+
             {todos.map((todo) => (
 
                 <li key={todo.id} className="lists">
